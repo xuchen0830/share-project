@@ -10,6 +10,13 @@ const projectsList = [
     skill: ["React"]
   },
   {
+    id: "4",
+    title: "test4",
+    imageUrl: "/logo.png",
+    description: "南紡專案",
+    skill: ["TypeScript", "JavaScript"]
+  },
+  {
     id: "2",
     title: "test2",
     imageUrl: "/IMG_1940.jpeg",
