@@ -27,6 +27,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
         }}>
             <img src={data.imageUrl} alt={data.title} style={{ 
                 width: "100%", 
+                height: "400px", 
+                marginBottom: "16px",
                 borderRadius: "4px",
                 objectFit: "cover", 
             }}/>

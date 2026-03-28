@@ -1,43 +1,19 @@
 
-import ProjectCard from './components/ProjectCard';
+import Siderbar from './components/select';
+import MainContent from './components/Main';
 
-const projectsList = [
-  {
-    id: "1",
-    title: "test1",
-    imageUrl: "/IMG_1694.jpeg",
-    description: "我超屌",
-    skill: ["React"]
-  },
-  {
-    id: "4",
-    title: "test4",
-    imageUrl: "/logo.png",
-    description: "南紡專案",
-    skill: ["TypeScript", "JavaScript"]
-  },
-  {
-    id: "2",
-    title: "test2",
-    imageUrl: "/IMG_1940.jpeg",
-    description: "我超帥",
-    skill: ["CSS", "TypeScript"]
-  },
-  {
-    id: "3",
-    title: "test3",
-    imageUrl: "/IMG_2013.jpeg",
-    description: "我分手了好難過干",
-    skill: ["TypeScript", "JavaScript"]
-  }
-];
+
 
 function App() {
+  
   return (
+    
     <div className="admin-container" style={{ 
-      backgroundColor: "#f8fafc", 
+      display: "flex", 
+      flexDirection: "column", 
       minHeight: "100vh", 
-      padding: "40px" 
+      backgroundColor: "#f8fafc", 
+      width: "100%",
     }}>
       {/* 標題區域 */}
       <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -56,15 +32,9 @@ function App() {
           吃我屌
         </button>
       </div>
-
-      <div className="project-grid" style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", // 自動填充，最小 300px
-        gap: "24px" 
-      }}>
-        {projectsList.map((project) => (
-          <ProjectCard key={project.id} data={project} />
-        ))}
+      <div style={{ display: 'flex', gap: '24px' ,minHeight: "100vh"}}>
+        <Siderbar /> {/* 3. 呼叫側邊欄組件 */}
+        <MainContent /> {/* 4. 呼叫主內容組件 */}
       </div>
     </div>
   );
