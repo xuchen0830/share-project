@@ -1,7 +1,7 @@
 import type React from "react";
 
 interface Project {
-    id: string;
+    id: number;
     title: string;
     imageUrl: string;
     description: string;
@@ -13,6 +13,23 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
+    const handleDelete = async () => {
+        if (!window.confirm("你確定要刪掉這個專案嗎？")) return;
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8080/api/projects/${data.id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert("刪除成功！");
+                window.location.reload();
+            }
+        } catch (err) {
+            console.error("刪除失敗:", err);
+        }
+    };
+
     return (
         <div className="project-card" style={{
             border: "1px solid #ccc",
@@ -25,13 +42,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
             overflow: "hidden",
             transition: "transform 0.5s",
         }}>
-            <img src={data.imageUrl} alt={data.title} style={{ 
+            // ProjectCard.tsx 內部
+            <img 
+            // 關鍵：在路徑前面補上後端的網址
+                src={`http://127.0.0.1:8080${data.imageUrl}`} 
+                alt={data.title} 
+                style={{ 
                 width: "100%", 
                 height: "400px", 
-                marginBottom: "16px",
-                borderRadius: "4px",
                 objectFit: "cover", 
-            }}/>
+                // ... 其他樣式
+                }}
+            />
             <div className="card-body" style={{
                 padding:'16px',
                 flexGrow: 1 ,
@@ -39,7 +61,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
                 flexDirection:'column',
                 justifyContent:'space-between',
             }}>
-                <h2 style={{margin:'0 0 8px 0'}}>{data.title}</h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h2 style={{margin:'0 0 8px 0'}}>{data.title}</h2>
+                    <button 
+                        onClick={handleDelete}
+                        style={{ 
+                            backgroundColor: '#fee2e2', 
+                            color: '#ef4444', 
+                            border: 'none', 
+                            borderRadius: '4px', 
+                            padding: '4px 8px', 
+                            cursor: 'pointer',
+                            fontSize: '12px'
+                        }}
+                    >
+                        刪除
+                    </button>
+                </div>
                 <p style={{
                         margin:'0 0 16px 0',
                         fontSize:'14px',
